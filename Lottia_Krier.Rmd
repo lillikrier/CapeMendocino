@@ -1,0 +1,28 @@
+---
+title: "Lottia.digitalis"
+author: "Lilli Krier"
+date: "10-21-19"
+output: html_document
+---
+
+# Setup
+
+```{r}
+
+opts_knit$set(root.dir = "~/Users/crandall_lab/Desktop/Lilli Krier/Analysis")
+  
+library(rentrez)
+library(ape)
+library(pegas)
+library(strataG)
+library(stringr)
+
+# read in the data
+
+Ldigitalis <-read.FASTA("../Lottia_digitalis.fasta")
+```
+
+
+
+
+L.digitalis

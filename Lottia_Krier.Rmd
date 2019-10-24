@@ -14,6 +14,8 @@ library(pegas)
 library(strataG)
 library(stringr)
 library(knitr)
+library(ggplot2)
+library(reshape2)
 
 #set the working directory
 opts_knit$set(root.dir = "~/Users/crandall_lab/Desktop/Lilli_Krier/CapeMendocino")
@@ -59,10 +61,7 @@ ind.hap<-ind.hap[,c("Patricks Point","Trinidad Head","Shelter Cove","Kibesillah"
 #Pick some funky colors
 mycolors <- c("seagreen1","seagreen3","plum1", "plum3")
 
-colormap <- str_replace(pop,"Trinidad Head", mycolors[1])
-colormap <- str_replace(colormap,"Patricks Point", mycolors[2])
-colormap <- str_replace(colormap,"Shelter Cove", mycolors[3])
-colormap <- str_replace(colormap,"Kibesillah", mycolors[4])
+
 
 plot(net, size=attr(net,"freq"), scale.ratio=2, pie = ind.hap, legend = F, labels = F, threshold = 0, show.mutation = 2, fast = T, bg = mycolors)
 
@@ -71,7 +70,67 @@ legend("bottomleft", colnames(ind.hap), col=mycolors, pch=19, ncol = 2)
 
 ```
 
+# Diversity Statistics
+
+```{r}
+Ldigitalis_g <- sequence2gtypes(Ldigitalis, strata = pop)
+
+Ldigitalis_g <- labelHaplotypes(Ldigitalis_g)
+
+stratastat<-function(x,pop=pop,fun=nuc.div){
+  #this function will calculate stats for a DNAbin object (x), stratified across populations given in pop. 
+  # Some functions this will work with: nuc.div(), theta.s(), tajima.test() from pegas, FusFs(), exptdHet() from strataG,
+stats<-NULL
+for(p in unique(pop)){
+  stat<-fun(x[grep(p,rownames(x)),])
+  stats<-c(stats,stat)
+}
+names(stats)<-unique(pop)
+return(stats)
+}
+
+
+nucd<-stratastat(Ldigitalis,pop=pop,fun=nuc.div)
+Fs<-stratastat(Ldigitalis,pop=pop,fun=fusFs)
+
+kable(data.frame("Nucleotide Diversity"=nucd, "Fu's Fs" = Fs ))
+
+Ldigitalis_g
+
+```
 
 
 
+# F-statistics
 
+Took some hints from [here](http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization)
+
+```{r}
+
+pairwise_phi <- pairwiseTest(Ldigitalis_g$gtypes, stats = "phist", nrep = 10000, model = "raw")
+
+# Let's plot this as a heatmap
+
+  get_lower_tri<-function(x){
+    x[upper.tri(x)] <- NA
+    return(x)
+  }
+  
+phiST <- pairwise_phi$pair.mat$PHIst
+
+phiST[upper.tri(phiST)] = t(phiST)[upper.tri(phiST)]
+
+phiST <- phiST[c(2,4,3,1),c(2,4,3,1)]
+  
+phiST[upper.tri(phiST)] <- phiST[lower.tri(phiST)]
+
+melted_phiST <- melt(phiST)
+"Patricks Point","Trinidad Head","Shelter Cove","Kibesillah"
+
+levels(melted_phiST$Var1)<-c("Kibesillah", "Shelter Cove", "Trinidad Head", "Patrick's Point")
+levels(melted_phiST$Var2)<-c("Kibesillah", "Shelter Cove", "Trinidad Head", "Patrick's Point")
+ggplot(data = melted_phiST, aes(Var2, Var1, fill = value)) + geom_tile(color = "white") + scale_fill_gradient(low = "white", high = "orange", name = "phi_ST")
+
+
+
+```

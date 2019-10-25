@@ -11,7 +11,7 @@ output:
 
 # Setup
 
-```{r warning=F}
+```{r warning=F, message=F}
 library(rentrez)
 library(ape)
 library(pegas)
@@ -22,7 +22,7 @@ library(ggplot2)
 library(reshape2)
 
 #set the working directory
-opts_knit$set(root.dir = "~/Users/crandall_lab/Desktop/Lilli_Krier/CapeMendocino")
+#opts_knit$set(root.dir = "~/Users/crandall_lab/Desktop/Lilli_Krier/CapeMendocino")
   
 
 
@@ -133,14 +133,14 @@ Rowv <- c(4,3,2,1)
 dendrogram <- reorder(dendrogram, Rowv)
 reorderfun <- function(d,w) { d }
 
-heatmap(phiST,scale="none",Rowv=dendrogram, reorderfun=reorderfun, cexRow = 1, cexCol=0.8)
+heatmap(phiST,scale="none",Rowv=dendrogram, reorderfun=reorderfun, cexRow = 1, cexCol=0.8, legend = "col")
 
 ```
 
 ## AMOVA
 
 ```{r}
-write.csv(pop,"amova_hypotheses_lottia.csv",row.names = F, quote=F)
+#write.csv(pop,"amova_hypotheses_lottia.csv",row.names = F, quote=F)
 #Open this file up in a spreadsheet program and fill out your hypotheses for higher level hierarchies, with the name of your hypothesis in the header, and pop as the name of the population column
 
 #read them back into R
@@ -155,7 +155,7 @@ dists<-dist.dna(Ldigitalis,model="raw")
 Test the Cape Mendocino hypothesis:
 
 ```{r}
-amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=1)
+amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=1000)
 
 amova_out
 
@@ -172,3 +172,4 @@ FSTp<-NA
 
 result<-c(FCT,FSC,FST)
 ```
+

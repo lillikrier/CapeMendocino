@@ -1,0 +1,39 @@
+m053e-324-24815:ldigitalis_10 crandall_lab$ ../../ima2-8.27.12/src/IMa2 -c23 -g/Users/crandall_lab/Desktop/IMgui-darwin-x64/ldigitalis9_priors/priors.txt -i/Users/crandall_lab/Desktop/IMgui-darwin-x64/ldigitalis9_priors/Lottia_digitalis_ima2.txt -l200000 -o/Users/crandall_lab/Desktop/IMgui-darwin-x64/ldigitalis9_priors/lmode_out.txt -u2 -w/Users/crandall_lab/Desktop/IMgui-darwin-x64/ldigitalis9_priors/ldig_models.txt -y1 -p356 -r0 -v lottia_out
+executing program ...
+Locus 0: CO1, HKY  model 408 sites after elimination of gaps 
+  loaded 100000 genealogies from genealogy file  lottia_out.txt.ti
+  loaded 100000 genealogies from genealogy file  lottia_out2.txt.ti
+  loaded 100000 genealogies from genealogy file  lottia_out3.txt.ti
+  Number of files loaded : 3  total number of genealogies used: 200000 out of a total of: 300000 
+surface calculations . . .
+Finding marginal peaks and probabilities 
+ starting model: FULL
+         restart #1 (out of 10 maximum)
+         restart #2 (out of 10 maximum)
+done model : FULL
+joint density: -21.115337
+ starting model: equal migration rates
+         restart #1 (out of 10 maximum)
+         restart #2 (out of 10 maximum)
+done model : equal migration rates
+joint density: -22.426147
+ starting model: coalescent migration rate zero from 0 to 1
+         restart #1 (out of 10 maximum)
+         restart #2 (out of 10 maximum)
+         restart #3 (out of 10 maximum)
+         restart #4 (out of 10 maximum)
+         restart #5 (out of 10 maximum)
+         restart #6 (out of 10 maximum)
+         restart #7 (out of 10 maximum)
+done model : coalescent migration rate zero from 0 to 1
+joint density: -25.989754
+ starting model: coalescent migration rate zero from 1 to 0
+         restart #1 (out of 10 maximum)
+         restart #2 (out of 10 maximum)
+done model : coalescent migration rate zero from 1 to 0
+joint density: -21.115337
+ starting model: migration rates zero
+         restart #1 (out of 10 maximum)
+         restart #2 (out of 10 maximum)
+done model : migration rates zero
+joint density: -62.953887

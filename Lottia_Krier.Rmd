@@ -1,8 +1,12 @@
 ---
 title: "Lottia.digitalis"
-author: "Lilli Krier"
+author: "Lilli Krier, Eric Crandall"
 date: "10-21-19"
-output: html_document
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
 ---
 
 # Setup
@@ -105,32 +109,28 @@ Ldigitalis_g
 
 Took some hints from [here](http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization)
 
+Let's plot the pairwise PhiST statistics as a heatmap
+
 ```{r}
 
 pairwise_phi <- pairwiseTest(Ldigitalis_g$gtypes, stats = "phist", nrep = 10000, model = "raw")
 
-# Let's plot this as a heatmap
 
-  get_lower_tri<-function(x){
-    x[upper.tri(x)] <- NA
-    return(x)
-  }
-  
+
 phiST <- pairwise_phi$pair.mat$PHIst
 
+#symmetricize the matrix
 phiST[upper.tri(phiST)] = t(phiST)[upper.tri(phiST)]
+#put it in North to South Order
+phiST<-phiST[c(2,4,3,1),c(2,4,3,1)]
 
-phiST <- phiST[c(2,4,3,1),c(2,4,3,1)]
-  
-phiST[upper.tri(phiST)] <- phiST[lower.tri(phiST)]
+distance <- dist(phiST)
+cluster <- hclust(distance, method="ward.D")
+dendrogram <- as.dendrogram(cluster)
+Rowv <- c(4,3,2,1)
+dendrogram <- reorder(dendrogram, Rowv)
+reorderfun <- function(d,w) { d }
 
-melted_phiST <- melt(phiST)
-"Patricks Point","Trinidad Head","Shelter Cove","Kibesillah"
-
-levels(melted_phiST$Var1)<-c("Kibesillah", "Shelter Cove", "Trinidad Head", "Patrick's Point")
-levels(melted_phiST$Var2)<-c("Kibesillah", "Shelter Cove", "Trinidad Head", "Patrick's Point")
-ggplot(data = melted_phiST, aes(Var2, Var1, fill = value)) + geom_tile(color = "white") + scale_fill_gradient(low = "white", high = "orange", name = "phi_ST")
-
-
+heatmap(phiST,scale="none",Rowv=dendrogram, reorderfun=reorderfun, cexRow = 1, cexCol=0.8)
 
 ```

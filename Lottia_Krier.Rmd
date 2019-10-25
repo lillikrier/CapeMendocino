@@ -107,7 +107,9 @@ Ldigitalis_g
 
 # F-statistics
 
-Took some hints from [here](http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization)
+Took some hints from [here](http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization), and [here](https://stackoverflow.com/questions/5320814/order-of-rows-in-heatmap)
+
+## Pairwise PhiST
 
 Let's plot the pairwise PhiST statistics as a heatmap
 
@@ -133,4 +135,40 @@ reorderfun <- function(d,w) { d }
 
 heatmap(phiST,scale="none",Rowv=dendrogram, reorderfun=reorderfun, cexRow = 1, cexCol=0.8)
 
+```
+
+## AMOVA
+
+```{r}
+write.csv(pop,"amova_hypotheses_lottia.csv",row.names = F, quote=F)
+#Open this file up in a spreadsheet program and fill out your hypotheses for higher level hierarchies, with the name of your hypothesis in the header, and pop as the name of the population column
+
+#read them back into R
+amovahyps<-read.csv("amova_hypotheses_lottia.csv")
+CapeMendocino<-amovahyps$CapeMendocino
+pop1<-as.factor(pop)
+
+#Calculate the p-distance among all sequences
+dists<-dist.dna(Ldigitalis,model="raw")
+```
+
+Test the Cape Mendocino hypothesis:
+
+```{r}
+amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=1)
+
+amova_out
+
+# You can see the output above, but we can re-calculate it just to be sure.
+
+FCT<-amova_out$varcomp[1,1]/sum(amova_out$varcomp[,1])
+FCTp<-amova_out$varcomp[1,2]
+     
+FSC<-amova_out$varcomp[2,1]/(amova_out$varcomp[2,1]+amova_out$varcomp[3,1])
+FSCp<-amova_out$varcomp[2,2]
+      
+FST<-(amova_out$varcomp[1,1]+amova_out$varcomp[2,1])/sum(amova_out$varcomp[,1])
+FSTp<-NA
+
+result<-c(FCT,FSC,FST)
 ```

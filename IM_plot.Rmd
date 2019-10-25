@@ -1,0 +1,18 @@
+---
+title: "IMa2 Plotting"
+author: "Eric Crandall"
+date: "10-25-19"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+---
+
+
+```{r}
+ldigIM <- read.csv("./ldigitalis_ima2_10/lottia_demographic_curves.csv")
+
+t <- ggplot(data = ldigIM, mapping = aes(x = t0, y = Pt)) + geom_line()
+
+```

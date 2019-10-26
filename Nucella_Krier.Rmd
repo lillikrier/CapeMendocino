@@ -28,7 +28,7 @@ library(reshape2)
 
 # read in the data to a DNAbin object
 
-Nostrina <-read.FASTA("Final_Ostrina_Alignments/Nucella_ostrina_minusNindivs.fasta")
+Nostrina <-read.FASTA("Final_Ostrina_Alignments/Nucella_ostrina.fasta")
 
 # Initial look at data
 
@@ -90,10 +90,81 @@ return(stats)
 
 
 nucd<-stratastat(Nostrina,pop=pop,fun=nuc.div)
-Fs<-stratastat(Nostrina,pop=pop,fun=fusFs)
+#Fs<-stratastat(Nostrina,pop=pop,fun=fusFs)
 
-kable(data.frame("Nucleotide Diversity"=nucd, "Fu's Fs" = Fs ))
+nucd
+#kable(data.frame("Nucleotide Diversity"=nucd, "Fu's Fs" = Fs ))
 
 Nostrina_g
 
 ```
+
+# F-statistics
+
+Took some hints from [here](http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization), and [here](https://stackoverflow.com/questions/5320814/order-of-rows-in-heatmap)
+
+## Pairwise PhiST
+
+Let's plot the pairwise PhiST statistics as a heatmap
+
+```{r}
+
+pairwise_phi <- pairwiseTest(Nostrina_g$gtypes, stats = "phist", nrep = 10000, model = "raw")
+
+
+
+phiST <- pairwise_phi$pair.mat$PHIst
+
+#symmetricize the matrix
+phiST[upper.tri(phiST)] = t(phiST)[upper.tri(phiST)]
+#put it in North to South Order
+phiST<-phiST[c(1,3,2),c(1,3,2)]
+
+distance <- dist(phiST)
+cluster <- hclust(distance, method="ward.D")
+dendrogram <- as.dendrogram(cluster)
+Rowv <- c(3,2,1)
+dendrogram <- reorder(dendrogram, Rowv)
+reorderfun <- function(d,w) { d }
+
+heatmap(phiST,scale="none",Rowv=dendrogram, reorderfun=reorderfun, cexRow = 1, cexCol=0.8, legend = "col")
+
+```
+
+## AMOVA
+
+```{r}
+#write.csv(pop,"amova_hypotheses_lottia.csv",row.names = F, quote=F)
+#Open this file up in a spreadsheet program and fill out your hypotheses for higher level hierarchies, with the name of your hypothesis in the header, and pop as the name of the population column
+
+#read them back into R
+amovahyps<-read.csv("amova_hypotheses_lottia.csv")
+CapeMendocino<-amovahyps$CapeMendocino
+pop1<-as.factor(pop)
+
+#Calculate the p-distance among all sequences
+dists<-dist.dna(Ldigitalis,model="raw")
+```
+
+Test the Cape Mendocino hypothesis:
+
+```{r}
+amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=1000)
+
+amova_out
+
+# You can see the output above, but we can re-calculate it just to be sure.
+
+FCT<-amova_out$varcomp[1,1]/sum(amova_out$varcomp[,1])
+FCTp<-amova_out$varcomp[1,2]
+     
+FSC<-amova_out$varcomp[2,1]/(amova_out$varcomp[2,1]+amova_out$varcomp[3,1])
+FSCp<-amova_out$varcomp[2,2]
+      
+FST<-(amova_out$varcomp[1,1]+amova_out$varcomp[2,1])/sum(amova_out$varcomp[,1])
+FSTp<-NA
+
+result<-c(FCT,FSC,FST)
+```
+
+

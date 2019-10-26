@@ -1,19 +1,99 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Nucella ostrina"
+author: "Lilli Krier, Eric Crandall"
+date: "10-25-19"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+# Setup
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+```{r warning=F, message=F}
+library(rentrez)
+library(ape)
+library(pegas)
+library(strataG)
+library(stringr)
+library(knitr)
+library(ggplot2)
+library(reshape2)
+
+#set the working directory
+#opts_knit$set(root.dir = "~/Users/crandall_lab/Desktop/Lilli_Krier/CapeMendocino")
+  
+
+
+# read in the data to a DNAbin object
+
+Nostrina <-read.FASTA("Final_Ostrina_Alignments/Nucella_ostrina_minusNindivs.fasta")
+
+# Initial look at data
+
+
+Nostrina <- muscle(Nostrina)
+
+image.DNAbin(Nostrina)
+
+```
+## Haplotype network
+
+First make a network that colors each population separately
 
 ```{r}
-plot(cars)
+#make a population map by stripping the population name off of the DNAbin labels
+pop <- str_extract(rownames(Nostrina),"[A-Za-z]+\\s*[A-Za-z]+")
+
+#Label the haplotypes and sort
+h <- pegas::haplotype(Nostrina)
+h <- sort(h, what = "label")
+#Create the network
+net <- pegas::haploNet(h)
+#Funky code to make a table of which haplotypes occur in which populations
+i<-stack(setNames(attr(h, "index"), rownames(h)))
+i<-i[order(i$values),]
+ind.hap<-table(hap=i$ind, pop=pop)
+# put columns of ind.hap into North to South order
+ind.hap<-ind.hap[,c("Patricks Point","Trinidad Head","Shelter Cove")]
+
+#Pick some funky colors
+mycolors <- c("seagreen1","seagreen3","plum1", "plum3")
+
+
+
+plot(net, size=attr(net,"freq"), scale.ratio=2, pie = ind.hap, legend = F, labels = F, threshold = 0, show.mutation = 2, fast = T, bg = mycolors)
+
+#legend("bottomleft", colnames(ind.hap), col=mycolors, pch=19, ncol = 2)
+
+
 ```
+# Diversity Statistics
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+```{r}
+Nostrina_g <- sequence2gtypes(Nostrina, strata = pop)
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+Nostrina_g  <- labelHaplotypes(Nostrina_g)
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+stratastat<-function(x,pop=pop,fun=nuc.div){
+  #this function will calculate stats for a DNAbin object (x), stratified across populations given in pop. 
+  # Some functions this will work with: nuc.div(), theta.s(), tajima.test() from pegas, FusFs(), exptdHet() from strataG,
+stats<-NULL
+for(p in unique(pop)){
+  stat<-fun(x[grep(p,rownames(x)),])
+  stats<-c(stats,stat)
+}
+names(stats)<-unique(pop)
+return(stats)
+}
 
+
+nucd<-stratastat(Nostrina,pop=pop,fun=nuc.div)
+Fs<-stratastat(Nostrina,pop=pop,fun=fusFs)
+
+kable(data.frame("Nucleotide Diversity"=nucd, "Fu's Fs" = Fs ))
+
+Nostrina_g
+
+```

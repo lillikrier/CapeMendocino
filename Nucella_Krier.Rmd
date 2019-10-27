@@ -134,22 +134,22 @@ heatmap(phiST,scale="none",Rowv=dendrogram, reorderfun=reorderfun, cexRow = 1, c
 ## AMOVA
 
 ```{r}
-#write.csv(pop,"amova_hypotheses_lottia.csv",row.names = F, quote=F)
+#write.csv(pop,"amova_hypotheses_nucella.csv",row.names = F, quote=F)
 #Open this file up in a spreadsheet program and fill out your hypotheses for higher level hierarchies, with the name of your hypothesis in the header, and pop as the name of the population column
 
 #read them back into R
-amovahyps<-read.csv("amova_hypotheses_lottia.csv")
+amovahyps<-read.csv("amova_hypotheses_nucella.csv")
 CapeMendocino<-amovahyps$CapeMendocino
 pop1<-as.factor(pop)
 
 #Calculate the p-distance among all sequences
-dists<-dist.dna(Ldigitalis,model="raw")
+dists<-dist.dna(Nostrina,model="raw")
 ```
 
 Test the Cape Mendocino hypothesis:
 
 ```{r}
-amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=1000)
+amova_out<-pegas::amova(formula=dists~CapeMendocino/pop,nperm=1000)
 
 amova_out
 

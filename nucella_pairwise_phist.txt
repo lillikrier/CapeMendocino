@@ -1,0 +1,4 @@
+               Patricks Point Shelter Cove Trinidad Head
+Patricks Point             NA   0.00769923     0.2994701
+Shelter Cove        0.2937024           NA     0.3602640
+Trinidad Head       0.1103266   0.01774471            NA

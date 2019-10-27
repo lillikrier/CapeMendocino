@@ -1,0 +1,25 @@
+	Analysis of Molecular Variance
+
+Call: pegas::amova(formula = dists ~ CapeMendocino/pop1, nperm = 10000)
+
+                       SSD          MSD df
+CapeMendocino 1.437124e-05 1.437124e-05  1
+pop1          1.862939e-06 1.862939e-06  1
+Error         4.253711e-05 9.247197e-07 46
+Total         5.877129e-05 1.224402e-06 48
+
+Variance components:
+                  sigma2 P.value
+CapeMendocino 6.3100e-07  0.3291
+pop1          5.4729e-08  0.0734
+Error         9.2472e-07        
+
+Phi-statistics:
+CapeMendocino.in.GLOBAL (Phi_CT)          pop1.in.GLOBAL (Phi_ST) 
+                      0.39181610                       0.42580008 
+  pop1.in.CapeMendocino (Phi_SC) 
+                      0.05587779 
+
+Variance coefficients:
+       a        b        c 
+17.14286 15.10204 20.00000 

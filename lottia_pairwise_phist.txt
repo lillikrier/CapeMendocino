@@ -1,0 +1,5 @@
+                Kibesillah Patricks Point Shelter Cove Trinidad Head
+Kibesillah              NA     0.00009999   0.55954405    0.00169983
+Patricks Point  0.36982491             NA   0.00009999    0.73642636
+Shelter Cove   -0.01538677     0.41626979           NA    0.00019998
+Trinidad Head   0.33153153    -0.02885108   0.44285870            NA

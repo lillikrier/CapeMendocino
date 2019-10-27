@@ -13,6 +13,9 @@ output:
 ```{r}
 ldigIM <- read.csv("./ldigitalis_ima2_10/lottia_demographic_curves.csv")
 
-t <- ggplot(data = ldigIM, mapping = aes(x = t0, y = Pt)) + geom_line()
+nostIM <- read.csv("./nostrina_ima2/nucella_demographic_curves.csv")
+
+t <- ggplot() + geom_line(data = ldigIM, mapping = aes(x = t0, y = Pt)) + geom_line(data = nostIM, mapping = aes(x = t0, y = Pt))
+t
 
 ```

@@ -111,7 +111,7 @@ Let's plot the pairwise PhiST statistics as a heatmap
 
 pairwise_phi <- pairwiseTest(Nostrina_g$gtypes, stats = "phist", nrep = 10000, model = "raw")
 
-
+pairwise_phi$pair.mat$PHIst
 
 phiST <- pairwise_phi$pair.mat$PHIst
 
@@ -139,7 +139,7 @@ heatmap(phiST,scale="none", cexRow = 1, cexCol=0.8)
 #Open this file up in a spreadsheet program and fill out your hypotheses for higher level hierarchies, with the name of your hypothesis in the header, and pop as the name of the population column
 
 #read them back into R
-amovahyps<-read.csv("amova_hypotheses_nucella.csv")
+amovahyps<-read.csv("amova_hypotheses_nucella2.csv")
 
 CapeMendocino<-amovahyps$CapeMendocino
 pop1<-as.factor(pop)
@@ -152,7 +152,7 @@ Test the Cape Mendocino hypothesis:
 
 ```{r}
 
-amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=10000)
+amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=1000)
 
 
 amova_out
@@ -169,6 +169,8 @@ FST<-(amova_out$varcomp[1,1]+amova_out$varcomp[2,1])/sum(amova_out$varcomp[,1])
 FSTp<-NA
 
 result<-c(FCT,FSC,FST)
+result
+
 ```
 
 

@@ -63,7 +63,7 @@ ind.hap<-table(hap=i$ind, pop=pop)
 ind.hap<-ind.hap[,c("Patricks Point","Trinidad Head","Shelter Cove","Kibesillah")]
 
 #Pick some funky colors
-mycolors <- c("seagreen1","seagreen3","plum1", "plum3")
+mycolors <- c("blue3","dodgerblue2","darkorange", "darkorange4")
 
 
 

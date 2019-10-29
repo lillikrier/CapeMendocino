@@ -1,0 +1,233 @@
+IMa version 2.0 - Isolation with Migration Analysis  -  Jody Hey, Rasmus Nielsen, Sang Chul Choi, Vitor Sousa,  Janeen Pisciotta 2012 
+Release date: August 27, 2012
+
+
+INPUT AND STARTING INFORMATION 
+================================
+
+Command line string :  -c23 -g /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/priors.txt -i /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_ima2.txt -o/Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/lmode_out.txt -u2 -w/Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/nostrina_models.txt -y1 -p356 -r0 -v Nucella_ostrina_output. 
+  Input filename : /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_ima2.txt 
+  Output filename: /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/lmode_out.txt 
+  Random number seed : 1572373291 
+  Heating terms on command line :  
+  Calculation options on command line :  -c23 
+  Model options on command line :  
+  Output options on command line :  -p356 
+Prior distribution terms loaded from file : /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/priors.txt 
+All genealogy information used for surface estimation printed to file: /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/lmode_out.txt.ti
+
+Text from input file: Nucella_ostrina_Cape_Mendocino
+
+Number of sampled populations given in input file: 2 
+- Population Names - 
+Population 0 : North 
+Population 1 : South 
+
+Population Tree : (0,1):2
+
+Locus Information
+-----------------
+
+Number of loci: 1 
+Locus#	Locusname	Pop0#	Pop1#	Model	InheritanceScalar	MutationRatesPerYear
+0	CO1	 26	 13	HKY	0.250	1.23e-05
+
+Parameter Counts
+----------------
+   Population sizes : 3
+   Migration rates  : 2
+   Parameters in the MCMC simulation
+      Splitting times : 1
+      Mutation scalars: 1
+      HKY Kappa (ti/tv) ratios: 1
+
+Parameter Priors
+-----------------
+  Prior distribution terms given in file: /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/priors.txt
+
+  Splitting time maximum values 
+	Period	Prior maximum value
+	t0	10.000
+  Population size parameters maximum values 
+	Population	Prior maximum value
+	q0	100.000
+	q1	100.000
+	q2	1000.000
+  Migration parameters maximum values 
+	Migration rate	Maximum value
+	m0>1	50.000
+	m1>0	50.000
+
+LOAD TREES (L) MODE INFORMATION
+============================================================================
+  Base filename for loading files with sampled genealogies: Nucella_ostrina_output.*.ti
+  Files loaded with sampled genealogies:
+  loaded 300000 genealogies from genealogy file  Nucella_ostrina_output.2.ti
+  loaded 300000 genealogies from genealogy file  Nucella_ostrina_output.3.ti
+  loaded 300000 genealogies from genealogy file  Nucella_ostrina_output.4.ti
+
+  HEADER INFORMATION FROM FIRST GENEALOGY FILE
+  ---------------------------------------
+  ||-------------------------------------------
+  ||
+  ||Header for genealogy file:  /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_output.txt.ti
+  ||
+  ||-------------------------------------------
+  ||
+  ||IMa version 2.0 - Isolation with Migration Analysis  -  Jody Hey, Rasmus Nielsen, Sang Chul Choi, Vitor Sousa,  Janeen Pisciotta 2012 
+  ||Release date: August 27, 2012
+  ||
+  ||
+  ||INPUT AND STARTING INFORMATION 
+  ||================================
+  ||
+  ||Command line string :  -b3.0 -i/Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_ima2.txt -l8.0 -m100 -o/Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_output.txt -u2 -y1 -p234567 -c3 -g /Users/crandall_lab/Lilli_Krier/CapeMendocino/no  ||strina_ima2/run2/priors.txt 
+  ||  Input filename : /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_ima2.txt 
+  ||  Output filename: /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_output.txt 
+  ||  Random number seed : 1572286376 
+  ||  Heating terms on command line :  
+  ||  Calculation options on command line :  -c3 
+  ||  Model options on command line :  
+  ||  Output options on command line :  -p234567 
+  ||- Run Duration - 
+  ||     Burn period, # seconds: 10800 (total burn duration depends on IMburn file status)
+  ||          -User option for printing trendline during, or at end of burnin period, invoked
+  ||          -initial burn duration prior to beginning recording burntrend : 10000 steps
+  ||      Record period, # seconds per interval: 28800 
+  ||      Run period indefinite in length - determined by user using 'IMrun' file
+  ||- Metropolis Coupling -
+  ||     None 
+  ||Prior distribution terms loaded from file : /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/priors.txt 
+  ||All genealogy information used for surface estimation printed to file: /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_output.txt.ti
+  ||Distributions for migration event counts saved in file: /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_output.txt.mpt
+  ||TMRCA  histograms printed 
+  ||
+  ||Text from input file: Nucella_ostrina_Cape_Mendocino
+  ||
+  ||Number of sampled populations given in input file: 2 
+  ||- Population Names - 
+  ||Population 0 : North 
+  ||Population 1 : South 
+  ||
+  ||Population Tree : (0,1):2
+  ||
+  ||Locus Information
+  ||-----------------
+  ||
+  ||Number of loci: 1 
+  ||Locus#	Locusname	Pop0#	Pop1#	Model	InheritanceScalar	MutationRatesPerYear
+  ||0	CO1	 26	 13	HKY	0.250	1.23e-05
+  ||
+  ||Parameter Counts
+  ||----------------
+  ||   Population sizes : 3
+  ||   Migration rates  : 2
+  ||   Parameters in the MCMC simulation
+  ||      Splitting times : 1
+  ||      Mutation scalars: 1
+  ||      HKY Kappa (ti/tv) ratios: 1
+  ||
+  ||Parameter Priors
+  ||-----------------
+  ||  Prior distribution terms given in file: /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/priors.txt
+  ||
+  ||  Splitting time maximum values 
+  ||	Period	Prior maximum value
+  ||	t0	10.000
+  ||  Population size parameters maximum values 
+  ||	Population	Prior maximum value
+  ||	q0	100.000
+  ||	q1	100.000
+  ||	q2	1000.000
+  ||  Migration parameters maximum values 
+  ||	Migration rate	Maximum value
+  ||	m0>1	50.000
+  ||	m1>0	50.000
+  ||
+  ||-------------------------------------------
+  ||
+  ||End of header for genealogy file:  /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run2/Nucella_ostrina_output.txt.ti
+  ||
+  ||-------------------------------------------
+  ||
+  END OF HEADER INFORMATION FROM FIRST GENEALOGY FILE
+  ----------------------------------------------
+
+  Number of files loaded : 3  total number of genealogies used: 300000 out of a total of: 900000 
+
+PARAMETER COMPARISONS, PROBABILITY THAT ROW PARAMETER IS GREATER THAN COLUMN PARAMETER
+========================================================================================
+    Comparisons only done for parameters with identical prior distributions 
+Population Sizes
+	q0	q1	q2
+q0	  - 	0.020	na
+q1	0.980	  - 	na
+q2	na	na	  - 
+
+Migration Rates
+	m0>1	m1>0
+m0>1	  - 	0.497
+m1>0	0.503	  - 
+
+
+
+MEANS, VARIANCES and CORRELATIONS OF PARAMETERS ('$' r > 0.4  '*' r > 0.75)
+=============================================================================
+Param:	q0	q1	q2	m0>1	m1>0
+Mean:	2.035	49.820	497.579	18.139	16.646
+Stdv:	6.958	28.423	289.782	14.407	11.053
+
+Correlations
+	q0	q1	q2	m0>1	m1>0
+q0	  - 	-0.185	0.000	0.011	0.049
+q1	-0.185	  - 	-0.000	0.015	0.067
+q2	0.000	-0.000	  - 	-0.002	0.001
+m0>1	0.011	0.015	-0.002	  - 	0.281
+m1>0	0.049	0.067	0.001	0.281	  - 
+
+
+Marginal Peak Locations and Probabilities
+=========================================
+  peak locations are estimated using a peak finding algorithm, which may
+  fail if the curve has multiple peaks. All peaks can also be found, and
+  related analyses conducted, by plotting the histograms
+
+
+Period 0
+--------
+Population Size Parameters
+ Param:	 q0	P	 q1	P
+ Set0	  0.261	  0.738	  9.633	  0.012
+ Set1	  0.233	  0.960	 12.368	  0.011
+ All	  0.240	  0.848	 10.847	  0.011
+ LR95%Lo	  0.028		  0.597	
+ LR95%Hi	  2.136		>max	
+ LastPeriod	1		1	
+Migration Rate Parameters
+ Param:	 m0>1	P	 m1>0	P
+ Set0	  0.000	  0.089	  7.365	  0.050
+ Set1	  0.000	  0.058	 10.133	  0.050
+ All	  0.000	  0.073	  8.990	  0.049
+ LR95%Lo	na		  1.243	
+ LR95%Hi	 45.787		 37.768	
+ LLRtest   0.000ns	  4.890*	
+ LastPeriod	0		0	
+Population Migration (2NM) Terms
+ Term:	 2N0M0>1	P	 2N1M1>0	P
+ Set0	  0.870	  0.135	 14.755	  0.002
+ Set1	  2.384	  0.106	 20.869	  0.002
+ All	  1.064	  0.118	 20.237	  0.002
+ LLRtest   0.958ns	  1.096ns	
+ LastPeriod	0		0	
+
+Period 1
+--------
+Population Size Parameters
+ Param:	 q2	P
+ Set0	  3.780	  0.001
+ Set1	  5.996	  0.001
+ All	  4.855	  0.001
+ LR95%Lo	na	
+ LR95%Hi	>max	
+ LastPeriod	-1	
+

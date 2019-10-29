@@ -111,7 +111,7 @@ Let's plot the pairwise PhiST statistics as a heatmap
 
 pairwise_phi <- pairwiseTest(Nostrina_g$gtypes, stats = "phist", nrep = 10000, model = "raw")
 
-pairwise_phi$pair.mat$PHIst
+
 
 phiST <- pairwise_phi$pair.mat$PHIst
 
@@ -152,7 +152,7 @@ Test the Cape Mendocino hypothesis:
 
 ```{r}
 
-amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=1000)
+amova_out<-pegas::amova(formula=dists~CapeMendocino/pop1,nperm=10000)
 
 
 amova_out
@@ -169,8 +169,6 @@ FST<-(amova_out$varcomp[1,1]+amova_out$varcomp[2,1])/sum(amova_out$varcomp[,1])
 FSTp<-NA
 
 result<-c(FCT,FSC,FST)
-result
-
 ```
 
 

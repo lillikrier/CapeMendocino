@@ -1,1 +1,0 @@
-../../../Desktop/ima2-8.27.12/src/IMa2 -b3.0 -i/Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run5/Nucella_ostrina_ima2.txt -l23.0 -m100 -o/Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run5/Nucella_ostrina_output.txt -u2 -y1 -p234567 -c3 -g /Users/crandall_lab/Lilli_Krier/CapeMendocino/nostrina_ima2/run5/priors.txt 
